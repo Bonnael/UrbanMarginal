@@ -6,5 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="Outils/" kind="src" path="src"/>
+	<classpathentry kind="src" path="media"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
