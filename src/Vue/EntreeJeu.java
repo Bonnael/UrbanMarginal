@@ -1,7 +1,6 @@
 package Vue;
 
-import Vue.Arene;
-import Vue.ChoixJoueur;
+import Controler.Control;
 
 import java.awt.EventQueue;
 
@@ -21,13 +20,12 @@ public class EntreeJeu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtIPServer;
-	private Arene frmArene;
-	private ChoixJoueur frmChoixJoueur;
+	private Control control;
 
 	/**
 	 * Create the frame.
 	 */
-	public EntreeJeu() {
+	public EntreeJeu(Control control) {
 		// Content Pane
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 330, 165);
@@ -95,21 +93,20 @@ public class EntreeJeu extends JFrame {
 		btnExit.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnExit.setBounds(203, 92, 89, 23);
 		contentPane.add(btnExit);
+		
+		// Controler
+		this.control = control;
 	}
 	
 	
 	// clic sur le bouton start
 	private void btnStart_clic() {
-		this.frmArene = new Arene();
-		this.frmArene.setVisible(true);
-		this.dispose();
+		this.control.evenementEntreeJeu("serveur");
 	}
 	
 	// clic sur le bouton connect
 	private void btnConnect_clic() {
-		this.frmChoixJoueur = new ChoixJoueur();
-		this.frmChoixJoueur.setVisible(true);
-		this.dispose();
+		this.control.evenementEntreeJeu(txtIPServer.getText());
 	}
 	
 	// clic sur le bouton exit

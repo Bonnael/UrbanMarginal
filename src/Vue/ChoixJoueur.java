@@ -1,6 +1,7 @@
 package Vue;
 
 import Vue.Arene;
+import Controler.Control;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -11,26 +12,32 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class ChoixJoueur extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtPseudo;
-	private JLabel lblGauche;
-	private JLabel lblDroite;
-	private JLabel lblGo;
+	private JLabel lblPersonnage;
+	private Control control;
 	
-	private Arene frmArene;
+	private int numPerso;
+	private final int MAXNUMPERSO = 3;
+
 
 	/**
 	 * Create the frame.
 	 */
-	public ChoixJoueur() {
+	public ChoixJoueur(Control control) {
 		
 		// ContentPane
 		this.getContentPane().setPreferredSize(new Dimension(400, 275));
@@ -42,6 +49,12 @@ public class ChoixJoueur extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		// Label choix perso
+		lblPersonnage = new JLabel("");
+		lblPersonnage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPersonnage.setBounds(142, 114, 120, 120);
+		contentPane.add(lblPersonnage);
 		
 		// Fond
 		JLabel lblFond = new JLabel("");
@@ -58,53 +71,115 @@ public class ChoixJoueur extends JFrame {
 		txtPseudo.setColumns(10);
 		
 		// Label Fleche Gauche
-		lblGauche = new JLabel("");
+		JLabel lblGauche = new JLabel("");
 		lblGauche.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblGauche_clic();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				sourisDoigt();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				sourisNormal();
 			}
 		});
 		lblGauche.setBounds(53, 139, 53, 52);
 		contentPane.add(lblGauche);
 		
 		// Label Fleche Droite
-		lblDroite = new JLabel("");
+		JLabel lblDroite = new JLabel("");
 		lblDroite.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblDroite_clic();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				sourisDoigt();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				sourisNormal();
 			}
 		});
 		lblDroite.setBounds(292, 139, 46, 52);
 		contentPane.add(lblDroite);
 		
 		// Label Go
-		lblGo = new JLabel("");
+		JLabel lblGo = new JLabel("");
 		lblGo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblGo_clic();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				sourisDoigt();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				sourisNormal();
+			}
 		});
 		lblGo.setBounds(308, 196, 68, 65);
 		contentPane.add(lblGo);
+		
+		// Controler
+		this.control = control;
+		
+		// Numero personnage
+		this.numPerso = 1;
+		
+		// Affichage personnage
+		this.affichePerso();
 	}
 	
 	// Clic sur la flèche de gauche
 	private void lblGauche_clic() {
-		System.out.println("Précédent");
+		if (numPerso == 1) {
+			numPerso = MAXNUMPERSO;
+		} else {
+			numPerso--;
+		}
+		this.affichePerso();
 	}
 	
 	// Clic sur la flèche de droite
 	private void lblDroite_clic() {
-		System.out.println("Suivant");
+		if (numPerso == MAXNUMPERSO) {
+			numPerso = 1;
+		} else {
+			numPerso++;
+		}
+		this.affichePerso();
 	}
 	
 	// Clic sur le bouton go
 	private void lblGo_clic() {
-		this.frmArene = new Arene();
-		this.frmArene.setVisible(true);
-		this.dispose();
+		if (txtPseudo.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "La saisie du pseudo est obligatoire");
+			txtPseudo.requestFocus();
+		} else {
+			this.control.evenementChoixJoueur(txtPseudo.getText(), numPerso);
+		}
+	}
+	
+	// Affichage des personnages
+	private void affichePerso() {
+		String chemin = "personnages/perso" + this.numPerso + "marche1d1.gif";
+		URL resource = getClass().getClassLoader().getResource(chemin);
+		this.lblPersonnage.setIcon(new ImageIcon(resource));
+	}
+	
+	// Affichage souris
+	private void sourisNormal() {
+		contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	}
+	
+	private void sourisDoigt() {
+		contentPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 }
