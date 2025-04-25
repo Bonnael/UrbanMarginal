@@ -2,6 +2,7 @@ package Vue;
 
 import Vue.Arene;
 import Controler.Control;
+import Controler.Global;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,7 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 
-public class ChoixJoueur extends JFrame {
+public class ChoixJoueur extends JFrame implements Global {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -31,7 +32,6 @@ public class ChoixJoueur extends JFrame {
 	private Control control;
 	
 	private int numPerso;
-	private final int MAXNUMPERSO = 3;
 
 
 	/**
@@ -60,7 +60,7 @@ public class ChoixJoueur extends JFrame {
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, 400, 275);
 		String chemin = "fonds/fondchoix.jpg";
-		URL resource = getClass().getClassLoader().getResource(chemin);
+		URL resource = getClass().getClassLoader().getResource(FONDCHOIX);
 		lblFond.setIcon(new ImageIcon(resource));
 		contentPane.add(lblFond);
 		
@@ -169,7 +169,7 @@ public class ChoixJoueur extends JFrame {
 	
 	// Affichage des personnages
 	private void affichePerso() {
-		String chemin = "personnages/perso" + this.numPerso + "marche1d1.gif";
+		String chemin = CHEMINPERSO + PERSO + this.numPerso + MARCHE + 1 + "d" + 1 + EXTFICHIERPERSO;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		this.lblPersonnage.setIcon(new ImageIcon(resource));
 	}

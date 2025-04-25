@@ -1,5 +1,7 @@
 package Vue;
 
+import Controler.Global;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.net.URL;
@@ -16,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-public class Arene extends JFrame {
+public class Arene extends JFrame implements Global {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -58,8 +60,7 @@ public class Arene extends JFrame {
 			
 		// Fond
 		JLabel lblFond = new JLabel("");
-		String chemin = "fonds/fondarene.jpg";
-		URL resource = getClass().getClassLoader().getResource(chemin);
+		URL resource = getClass().getClassLoader().getResource(FONDARENE);
 		lblFond.setIcon(new ImageIcon(resource));
 		lblFond.setBounds(0, 0, 800, 600);
 		contentPane.add(lblFond);

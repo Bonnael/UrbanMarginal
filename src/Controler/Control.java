@@ -4,15 +4,16 @@ import Vue.EntreeJeu;
 import Vue.Arene;
 import Vue.ChoixJoueur;
 import outils.connexion.*;
+import Modele.Jeu;
+import Modele.JeuServeur;
+import Modele.JeuClient;
 
-public class Control implements AsyncResponse {
+public class Control implements AsyncResponse, Global {
 	
 	private EntreeJeu frmEntreeJeu;
 	private Arene frmArene;
 	private ChoixJoueur frmChoixJoueur;
-	
-	private String typeJeu;
-	private final int PORT = 6666;
+	private Jeu leJeu;
 	
 	public static void main(String[] args) {
 		new Control();
@@ -27,15 +28,14 @@ public class Control implements AsyncResponse {
 	// Repond au bouton connect ou start de EntreeJeu
 	public void evenementEntreeJeu(String info) {
 		// bouton start
-		if (info.equals("serveur")) {
-			typeJeu = "serveur";
+		if (info.equals(SERVEUR)) {
 			new ServeurSocket(this, PORT);
+			this.leJeu = new JeuServeur(this);
+			this.frmEntreeJeu.dispose();
 			this.frmArene = new Arene();
 			this.frmArene.setVisible(true);
-			frmEntreeJeu.dispose();
 		// bouton connect
 		} else {
-			typeJeu = "client";
 			new ClientSocket(this, info, PORT);
 		}
 	}
@@ -44,24 +44,34 @@ public class Control implements AsyncResponse {
 	public void evenementChoixJoueur(String pseudo, int numPerso) {
 		frmChoixJoueur.dispose();
 		this.frmArene.setVisible(true);
+		((JeuClient)this.leJeu).envoi(PSEUDO + STRINGSEPARATOR + pseudo + STRINGSEPARATOR + numPerso);
 	}
 
 	@Override
 	public void reception(Connection connection, String ordre, Object info) {
 		switch(ordre) {
-		case "connexion":
-			if (typeJeu.equals("client")) {
+		case CONNEXION:
+			if (!(this.leJeu instanceof JeuServeur)) {
+				this.leJeu = new JeuClient(this);
+				this.leJeu.connexion(connection);
 				frmEntreeJeu.dispose();
 				this.frmArene = new Arene();
 				this.frmChoixJoueur = new ChoixJoueur(this);
 				this.frmChoixJoueur.setVisible(true);
+			} else {
+				this.leJeu.connexion(connection);
 			}
 			break;
-		case "reception":
+		case RECEPTION:
+			this.leJeu.reception(connection, info);
 			break;
-		case "deconnexion":
+		case DECONNEXION:
 			break;
 		}
+	}
+	
+	public void envoi(Connection connection, Object info) {
+		connection.envoi(info);
 	}
 
 }
