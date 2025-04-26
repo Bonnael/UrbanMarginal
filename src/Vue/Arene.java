@@ -84,4 +84,15 @@ public class Arene extends JFrame implements Global {
 		jpnMur.add((JLabel)unMur);
 		jpnMur.repaint();
 	}
+	
+	// Setter sur le jpnMur
+	public void setJpnMur(JPanel jpnMur) {
+		this.jpnMur.add(jpnMur);
+		this.jpnMur.repaint();
+	}
+	
+	// Getter du jpnMur
+	public JPanel getjpnMur() {
+		return jpnMur;
+	}
 }

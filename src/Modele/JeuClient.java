@@ -1,13 +1,16 @@
 package Modele;
 
+import javax.swing.JPanel;
+
 import Controler.Control;
+import Controler.Global;
 import outils.connexion.Connection;
 
 /**
  * Gestion du jeu côté client
  *
  */
-public class JeuClient extends Jeu {
+public class JeuClient extends Jeu implements Global {
 	
 	private Connection connection;
 	/**
@@ -24,6 +27,9 @@ public class JeuClient extends Jeu {
 
 	@Override
 	public void reception(Connection connection, Object info) {
+		if (info instanceof JPanel) {
+			this.control.evenementJeuClient(AJOUTPANELMUR, info);
+		}
 	}
 	
 	@Override

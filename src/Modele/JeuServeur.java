@@ -41,6 +41,7 @@ public class JeuServeur extends Jeu implements Global {
 		String ordre = lesInfos[0];
 		switch (ordre) {
 			case PSEUDO:
+				this.control.evenementJeuServeur(AJOUTPANELMUR, connection);
 				String pseudo = lesInfos[1];
 				int numPerso = Integer.parseInt(lesInfos[2]);
 				this.lesJoueurs.get(connection).initPerso(pseudo, numPerso);

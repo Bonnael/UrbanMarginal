@@ -59,6 +59,9 @@ public interface Global {
 	// Message ajout mur
 	String AJOUTMUR = "ajout mur";
 	
+	// Message d'ajout du panel de mur
+	String AJOUTPANELMUR = "ajout panel mur";
+	
 	// Largeur de l'arène
 	int LARGEURARENE = 800;
 	

@@ -4,6 +4,9 @@ import Vue.EntreeJeu;
 import Vue.Arene;
 import Vue.ChoixJoueur;
 import outils.connexion.*;
+
+import javax.swing.JPanel;
+
 import Modele.Jeu;
 import Modele.JeuServeur;
 import Modele.JeuClient;
@@ -56,6 +59,22 @@ public class Control implements AsyncResponse, Global {
 		switch (ordre) {
 		case AJOUTMUR:
 			frmArene.ajoutMurs(info);
+			break;
+		case AJOUTPANELMUR:
+			this.leJeu.envoi((Connection)info, this.frmArene.getjpnMur());
+			break;
+		}
+	}
+	
+	/**
+	 * Demande provenant de JeuClient
+	 * @param ordre
+	 * @param info
+	 */
+	public void evenementJeuClient(String ordre, Object info) {
+		switch (ordre) {
+		case AJOUTPANELMUR:
+			this.frmArene.setJpnMur((JPanel)info);
 			break;
 		}
 	}
