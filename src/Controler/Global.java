@@ -17,6 +17,9 @@ public interface Global {
 	// Chemin dossier des images des personnages
 	String CHEMINPERSO = "personnages" + CHEMINSEPARATOR;
 	
+	// Chemin dossier de l'image du mur
+	String CHEMINMUR = "murs" + CHEMINSEPARATOR;
+	
 	// Debut nom images perso
 	String PERSO = "perso";
 	
@@ -26,10 +29,14 @@ public interface Global {
 	// Extension des fichier des images des personnages
 	String EXTFICHIERPERSO = ".gif";
 	
-	// Chemin de l'umage de fond de la vue ChoixJoueur
+	// Chemin de l'image de fond de la vue ChoixJoueur
 	String FONDCHOIX = CHEMINFOND + "fondchoix.jpg";
 	
+	// Chemin de l'image de fond de la vue Arene
 	String FONDARENE = CHEMINFOND + "fondarene.jpg";
+	
+	// Chemin de l'image du mur
+	String MUR = CHEMINMUR + "mur.gif";
 	
 	// Message "pseudo" envoyé pour la création d'un joueur
 	String PSEUDO = "pseudo";
@@ -48,4 +55,22 @@ public interface Global {
 	
 	// Message "serveur" pour la création d'un serveur
 	String SERVEUR = "serveur";
+	
+	// Message ajout mur
+	String AJOUTMUR = "ajout mur";
+	
+	// Largeur de l'arène
+	int LARGEURARENE = 800;
+	
+	// Longueur de l'arène
+	int HAUTEURARENE = 600;
+	
+	// Largeur Mur
+	int LARGEURMUR = 34;
+			
+	// Longueur Mur
+	int HAUTEURMUR = 35;
+	
+	// Nombre de mur sur l'arène
+	int NBMURS = 20;
 }

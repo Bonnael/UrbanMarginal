@@ -33,6 +33,7 @@ public class Control implements AsyncResponse, Global {
 			this.leJeu = new JeuServeur(this);
 			this.frmEntreeJeu.dispose();
 			this.frmArene = new Arene();
+			((JeuServeur)this.leJeu).constructionMurs();
 			this.frmArene.setVisible(true);
 		// bouton connect
 		} else {
@@ -45,6 +46,18 @@ public class Control implements AsyncResponse, Global {
 		frmChoixJoueur.dispose();
 		this.frmArene.setVisible(true);
 		((JeuClient)this.leJeu).envoi(PSEUDO + STRINGSEPARATOR + pseudo + STRINGSEPARATOR + numPerso);
+	}
+	/**
+	 * Demande provenant de JeuServeur
+	 * @param ordre
+	 * @param info
+	 */
+	public void evenementJeuServeur(String ordre, Object info) {
+		switch (ordre) {
+		case AJOUTMUR:
+			frmArene.ajoutMurs(info);
+			break;
+		}
 	}
 
 	@Override

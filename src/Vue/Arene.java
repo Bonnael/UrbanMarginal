@@ -1,6 +1,8 @@
 package Vue;
 
 import Controler.Global;
+import Modele.Mur;
+import Modele.Objet;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,6 +24,7 @@ public class Arene extends JFrame implements Global {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel jpnMur;
 	private JTextField txtSaisie;
 
 	/**
@@ -40,6 +43,13 @@ public class Arene extends JFrame implements Global {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		// Panel Mur
+		jpnMur = new JPanel();
+		jpnMur.setBounds(0, 0, LARGEURARENE, HAUTEURARENE);
+		jpnMur.setOpaque(false);
+		jpnMur.setLayout(null);
+		contentPane.add(jpnMur);
 		
 		// Saisie Chat
 		txtSaisie = new JTextField();
@@ -64,9 +74,14 @@ public class Arene extends JFrame implements Global {
 		lblFond.setIcon(new ImageIcon(resource));
 		lblFond.setBounds(0, 0, 800, 600);
 		contentPane.add(lblFond);
-		
-
-
-
+	}
+	
+	/**
+	 * Ajour d'un mur dans le panel des murs
+	 * @param unMur le mur à ajouter
+	 */
+	public void ajoutMurs(Object unMur) {
+		jpnMur.add((JLabel)unMur);
+		jpnMur.repaint();
 	}
 }
