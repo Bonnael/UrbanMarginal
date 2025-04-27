@@ -8,6 +8,15 @@ public interface Global {
 	// Nbr de joueur max
 	int MAXNUMPERSO = 3;
 	
+	// Vie de depart pour tous les persos
+	int MAXVIE = 10;
+	
+	// Gain de point de vie lors d'une attaque
+	int GAIN = 1;
+	
+	// Perte de point de vie lors d'une attaque
+	int PERTE = 2;
+	
 	// Caractère de séparation des chemin
 	String CHEMINSEPARATOR = "/";
 	
@@ -62,6 +71,12 @@ public interface Global {
 	// Message d'ajout du panel de mur
 	String AJOUTPANELMUR = "ajout panel mur";
 	
+	// Message d'ajout de jlabel dans l'arene du serveur
+	String AJOUTJLABELJEU = "ajout jlabel jeu";
+	
+	// Message pour modifier le panel du jeu dans l'arène du client
+	String MODIFPANELJEU = "modif panel jeu";
+	
 	// Largeur de l'arène
 	int LARGEURARENE = 800;
 	
@@ -76,4 +91,19 @@ public interface Global {
 	
 	// Nombre de mur sur l'arène
 	int NBMURS = 20;
+	
+	// hauteur du personnage
+	int HAUTEURPERSO = 44;
+	
+	// largeur du personnage
+	int LARGEURPERSO = 39;
+	
+	// Hauteur du message
+	int HAUTEURMESSAGE = 8;
+	
+	// Direction : droite
+	int DROITE = 1;
+	
+	// Direction : gauche
+	int GAUCHE = 0;
 }

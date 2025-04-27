@@ -24,6 +24,7 @@ public class Arene extends JFrame implements Global {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel jpnJeu;
 	private JPanel jpnMur;
 	private JTextField txtSaisie;
 
@@ -44,6 +45,13 @@ public class Arene extends JFrame implements Global {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		// Panel Joueur
+		jpnJeu = new JPanel();
+		jpnJeu.setBounds(0, 0, LARGEURARENE, HAUTEURARENE);
+		jpnJeu.setOpaque(false);
+		jpnJeu.setLayout(null);
+		contentPane.add(jpnJeu);
+			
 		// Panel Mur
 		jpnMur = new JPanel();
 		jpnMur.setBounds(0, 0, LARGEURARENE, HAUTEURARENE);
@@ -83,6 +91,27 @@ public class Arene extends JFrame implements Global {
 	public void ajoutMurs(Object unMur) {
 		jpnMur.add((JLabel)unMur);
 		jpnMur.repaint();
+	}
+	
+	/**
+	 * Ajout d'un joueur, son message ou sa boule, dans le panel de jeu
+	 * @param unJLabel
+	 */
+	public void ajoutJLabelJeu(JLabel unJLabel) {
+		this.jpnJeu.add(unJLabel);
+		this.jpnJeu.repaint();
+	}
+	
+	// Setter du jpnJeu
+	public void setJpnJeu(JPanel jpnJeu) {
+		this.jpnJeu.removeAll();
+		this.jpnJeu.add(jpnJeu);
+		this.jpnJeu.repaint();
+	}
+	
+	// Getter du jpnJeu
+	public JPanel getJpnJeu() {
+		return jpnJeu;
 	}
 	
 	// Setter sur le jpnMur

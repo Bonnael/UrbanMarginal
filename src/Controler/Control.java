@@ -5,6 +5,7 @@ import Vue.Arene;
 import Vue.ChoixJoueur;
 import outils.connexion.*;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Modele.Jeu;
@@ -63,6 +64,12 @@ public class Control implements AsyncResponse, Global {
 		case AJOUTPANELMUR:
 			this.leJeu.envoi((Connection)info, this.frmArene.getjpnMur());
 			break;
+		case AJOUTJLABELJEU:
+			this.frmArene.ajoutJLabelJeu((JLabel)info);
+			break;
+		case MODIFPANELJEU:
+			this.leJeu.envoi((Connection)info, this.frmArene.getJpnJeu());
+			break;
 		}
 	}
 	
@@ -75,6 +82,9 @@ public class Control implements AsyncResponse, Global {
 		switch (ordre) {
 		case AJOUTPANELMUR:
 			this.frmArene.setJpnMur((JPanel)info);
+			break;
+		case MODIFPANELJEU:
+			this.frmArene.setJpnJeu((JPanel)info);
 			break;
 		}
 	}
