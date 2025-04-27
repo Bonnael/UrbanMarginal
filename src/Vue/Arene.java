@@ -1,5 +1,6 @@
 package Vue;
 
+import Controler.Control;
 import Controler.Global;
 import Modele.Mur;
 import Modele.Objet;
@@ -19,6 +20,8 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Arene extends JFrame implements Global {
 
@@ -26,12 +29,16 @@ public class Arene extends JFrame implements Global {
 	private JPanel contentPane;
 	private JPanel jpnJeu;
 	private JPanel jpnMur;
+	private JTextArea txtChat;
 	private JTextField txtSaisie;
+	private Control control;
+	private Boolean client;
 
 	/**
 	 * Create the frame.
 	 */
-	public Arene() {
+	public Arene(Control control, String typeJeu) {
+		this.client = typeJeu.equals(CLIENT);
 		// ContentPane
 		setTitle("Arene");
 		this.getContentPane().setPreferredSize(new Dimension(800, 800));
@@ -60,10 +67,18 @@ public class Arene extends JFrame implements Global {
 		contentPane.add(jpnMur);
 		
 		// Saisie Chat
-		txtSaisie = new JTextField();
+		if (this.client) {
+			txtSaisie = new JTextField();
+			txtSaisie.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					validationChat(e);
+				}
+			});
 		txtSaisie.setBounds(0, 600, 800, 25);
 		contentPane.add(txtSaisie);
 		txtSaisie.setColumns(10);
+		}
 		
 		// Container Chat
 		JScrollPane jspChat = new JScrollPane();
@@ -73,7 +88,8 @@ public class Arene extends JFrame implements Global {
 		contentPane.add(jspChat);
 		
 		// Chat
-		JTextArea txtChat = new JTextArea();
+		txtChat = new JTextArea();
+		txtChat.setEditable(false);
 		jspChat.setViewportView(txtChat);
 			
 		// Fond
@@ -82,6 +98,8 @@ public class Arene extends JFrame implements Global {
 		lblFond.setIcon(new ImageIcon(resource));
 		lblFond.setBounds(0, 0, 800, 600);
 		contentPane.add(lblFond);
+		
+		this.control = control;
 	}
 	
 	/**
@@ -123,5 +141,34 @@ public class Arene extends JFrame implements Global {
 	// Getter du jpnMur
 	public JPanel getjpnMur() {
 		return jpnMur;
+	}
+	
+	// Setter du txtChat
+	public void setTxtChat(String txtChat) {
+		this.txtChat.setText(txtChat);
+		this.txtChat.setCaretPosition(this.txtChat.getDocument().getLength());
+	}
+	
+	// Getter du txtChat
+	public String getTxtChat() {
+		return txtChat.getText();
+	}
+	
+	/**
+	 * Ajout d'une phrase à inserer à la fin du chat
+	 * @param phrase phrase à inserer
+	 */
+	public void ajoutChat(String phrase) {
+		this.txtChat.setText(this.txtChat.getText() + phrase + "\r\n");
+		this.txtChat.setCaretPosition(this.txtChat.getDocument().getLength());
+	}
+	
+	public void validationChat(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (!this.txtSaisie.getText().equals("")) {
+				this.control.evenementArene(this.txtSaisie.getText());
+				this.txtSaisie.setText("");
+			}
+		}
 	}
 }

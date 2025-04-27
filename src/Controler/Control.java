@@ -36,7 +36,7 @@ public class Control implements AsyncResponse, Global {
 			new ServeurSocket(this, PORT);
 			this.leJeu = new JeuServeur(this);
 			this.frmEntreeJeu.dispose();
-			this.frmArene = new Arene();
+			this.frmArene = new Arene(this, SERVEUR);
 			((JeuServeur)this.leJeu).constructionMurs();
 			this.frmArene.setVisible(true);
 		// bouton connect
@@ -70,6 +70,10 @@ public class Control implements AsyncResponse, Global {
 		case MODIFPANELJEU:
 			this.leJeu.envoi((Connection)info, this.frmArene.getJpnJeu());
 			break;
+		case AJOUTPHRASE:
+			this.frmArene.ajoutChat((String)info);
+			((JeuServeur)this.leJeu).envoi(this.frmArene.getTxtChat());
+			break;
 		}
 	}
 	
@@ -86,6 +90,9 @@ public class Control implements AsyncResponse, Global {
 		case MODIFPANELJEU:
 			this.frmArene.setJpnJeu((JPanel)info);
 			break;
+		case MODIFCHAT:
+			this.frmArene.setTxtChat((String)info);
+			break;
 		}
 	}
 
@@ -97,7 +104,7 @@ public class Control implements AsyncResponse, Global {
 				this.leJeu = new JeuClient(this);
 				this.leJeu.connexion(connection);
 				frmEntreeJeu.dispose();
-				this.frmArene = new Arene();
+				this.frmArene = new Arene(this, CLIENT);
 				this.frmChoixJoueur = new ChoixJoueur(this);
 				this.frmChoixJoueur.setVisible(true);
 			} else {
@@ -112,8 +119,21 @@ public class Control implements AsyncResponse, Global {
 		}
 	}
 	
+	/**
+	 * Envoi d'information
+	 * @param connection
+	 * @param info
+	 */
 	public void envoi(Connection connection, Object info) {
 		connection.envoi(info);
+	}
+	
+	/**
+	 * Information provenant de la vue Arene
+	 * @param info information
+	 */
+	public void evenementArene(String info) {
+		((JeuClient)this.leJeu).envoi(CHAT + STRINGSEPARATOR + info);
 	}
 
 }

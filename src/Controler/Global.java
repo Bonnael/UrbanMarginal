@@ -62,6 +62,9 @@ public interface Global {
 	// Message "Deconnection" envoyé par la classe Connection
 	String DECONNEXION = "deconnexion";
 	
+	// Message Client pour la creation d'un client
+	String CLIENT = "client";
+	
 	// Message "serveur" pour la création d'un serveur
 	String SERVEUR = "serveur";
 	
@@ -76,6 +79,15 @@ public interface Global {
 	
 	// Message pour modifier le panel du jeu dans l'arène du client
 	String MODIFPANELJEU = "modif panel jeu";
+	
+	// Message pour ajouter une phrase au chat
+	String CHAT = "chat";
+	
+	// Message pour ajouter une phrase dans l'arene du serveur
+	String AJOUTPHRASE = "ajout phrase";
+	
+	// Message pour modifier le contenu du chat dans l'arène du client
+	String MODIFCHAT = "modif chat";
 	
 	// Largeur de l'arène
 	int LARGEURARENE = 800;

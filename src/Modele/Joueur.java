@@ -175,4 +175,8 @@ public class Joueur extends Objet implements Global {
 	public void departJoueur() {
 	}
 	
+	// Getter sur le pseudo
+	public String getPseudo() {
+		return pseudo;
+	}
 }
