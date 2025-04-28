@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -112,13 +112,51 @@ public class Joueur extends Objet implements Global {
 	/**
 	 * Gère une action reçue et qu'il faut afficher (déplacement, tire de boule...)
 	 */
-	public void action() {
+	public void action(Integer action, Collection<Joueur> lesJoueurs, ArrayList<Mur> lesMurs) {
+		switch(action) {
+		case KeyEvent.VK_LEFT :
+			orientation = GAUCHE;
+			posX = deplace(posX, action, -PAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
+			break;
+		case KeyEvent.VK_RIGHT :
+			orientation = DROITE;
+			posX = deplace(posX, action, PAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
+			break;
+		case KeyEvent.VK_UP :
+			posY = deplace(posY, action, -PAS, HAUTEURARENE - HAUTEURPERSO, lesJoueurs, lesMurs);
+			break;
+		case KeyEvent.VK_DOWN :
+			posY = deplace(posY, action, PAS, HAUTEURARENE - HAUTEURPERSO, lesJoueurs, lesMurs);
+			break;
+		}
+		this.affiche(MARCHE, this.etape);
 	}
 
 	/**
-	 * Gère le déplacement du personnage
+	 * Gere le deplacement des joueur
+	 * @param position position de depart
+	 * @param action gauche, droite, haut ou bas
+	 * @param lepas valeur de deplacement (positif ou negatif)
+	 * @param max valeur à ne pas depasser
+	 * @param lesJoueurs collection de joueurs pour eviter les collisions
+	 * @param lesMurs collection de murs pour eviter les collisions
+	 * @return nouvelle position
 	 */
-	private void deplace() { 
+	private int deplace(int position, int action, int lepas, int max, Collection<Joueur> lesJoueurs, ArrayList<Mur> lesMurs) {
+		int ancpos = position;
+		position += lepas;
+		position = Math.max(position, 0);
+		position = Math.min(position, max);
+		if (action == KeyEvent.VK_LEFT || action == KeyEvent.VK_RIGHT) {
+			posX = position;
+		} else {
+			posY = position;
+		}
+		if (toucheJoueur(lesJoueurs) || toucheMur(lesMurs)) {
+			position = ancpos;
+		}
+		etape = (etape % NBETAPESMARCHE) + 1;
+		return position;
 	}
 
 	/**

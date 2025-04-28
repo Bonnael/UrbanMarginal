@@ -47,6 +47,12 @@ public class Arene extends JFrame implements Global {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
+		contentPane.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				contentPane_keyPressed(e);
+			}
+		});
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -89,6 +95,12 @@ public class Arene extends JFrame implements Global {
 		
 		// Chat
 		txtChat = new JTextArea();
+		txtChat.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				contentPane_keyPressed(e);
+			}
+		});
 		txtChat.setEditable(false);
 		jspChat.setViewportView(txtChat);
 			
@@ -125,6 +137,7 @@ public class Arene extends JFrame implements Global {
 		this.jpnJeu.removeAll();
 		this.jpnJeu.add(jpnJeu);
 		this.jpnJeu.repaint();
+		this.contentPane.requestFocus();
 	}
 	
 	// Getter du jpnJeu
@@ -163,12 +176,37 @@ public class Arene extends JFrame implements Global {
 		this.txtChat.setCaretPosition(this.txtChat.getDocument().getLength());
 	}
 	
+	/**
+	 * Si la touche entrée est pressée, poste le message sur le chat
+	 * @param e
+	 */
 	public void validationChat(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (!this.txtSaisie.getText().equals("")) {
 				this.control.evenementArene(this.txtSaisie.getText());
 				this.txtSaisie.setText("");
 			}
+			this.contentPane.requestFocus();
+		}
+	}
+	
+	/**
+	 * Evenement touche pressée sur le panel général
+	 * @param e information sur la touche
+	 */
+	public void contentPane_keyPressed(KeyEvent e) {
+		int touche = -1;
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_LEFT :
+		case KeyEvent.VK_RIGHT :
+		case KeyEvent.VK_UP :
+		case KeyEvent.VK_DOWN :
+			touche = e.getKeyCode();
+			break;
+		}
+		// si touche correcte, envoi de sa valeur
+		if (touche != -1) {
+			this.control.evenementArene(touche);
 		}
 	}
 }

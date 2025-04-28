@@ -83,6 +83,9 @@ public interface Global {
 	// Message pour ajouter une phrase au chat
 	String CHAT = "chat";
 	
+	// Message pour une action d'un joueur
+	String ACTION = "action";
+	
 	// Message pour ajouter une phrase dans l'arene du serveur
 	String AJOUTPHRASE = "ajout phrase";
 	
@@ -118,4 +121,10 @@ public interface Global {
 	
 	// Direction : gauche
 	int GAUCHE = 0;
+	
+	// Nombre de pixel parcouru lors d'un deplacement
+	int PAS = 10;
+	
+	// Nombre d'étape de marche de l'animation
+	int NBETAPESMARCHE = 4;
 }
