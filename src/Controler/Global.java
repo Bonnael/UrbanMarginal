@@ -29,11 +29,20 @@ public interface Global {
 	// Chemin dossier de l'image du mur
 	String CHEMINMUR = "murs" + CHEMINSEPARATOR;
 	
+	// Chemin dossier de l'image des boules
+	String CHEMINBOULES = "boules" + CHEMINSEPARATOR;
+	
 	// Debut nom images perso
 	String PERSO = "perso";
 	
 	// Etat marche du personnage
 	String MARCHE = "marche";
+	
+	// Etat touche du personnage
+	String TOUCHE = "touche";
+	
+	// Etat mort du personnage
+	String MORT = "mort";
 	
 	// Extension des fichier des images des personnages
 	String EXTFICHIERPERSO = ".gif";
@@ -46,6 +55,9 @@ public interface Global {
 	
 	// Chemin de l'image du mur
 	String MUR = CHEMINMUR + "mur.gif";
+	
+	// Chemin de l'image de la boule
+	String BOULE = CHEMINBOULES + "boule.gif";
 	
 	// Message "pseudo" envoyé pour la création d'un joueur
 	String PSEUDO = "pseudo";
@@ -116,6 +128,12 @@ public interface Global {
 	// Hauteur du message
 	int HAUTEURMESSAGE = 8;
 	
+	// Largeur de la boule
+	int LARGEURBOULE = 17;
+	
+	// Hauteur de la boule
+	int HAUTEURBOULE = 17;
+	
 	// Direction : droite
 	int DROITE = 1;
 	
@@ -125,6 +143,12 @@ public interface Global {
 	// Nombre de pixel parcouru lors d'un deplacement
 	int PAS = 10;
 	
-	// Nombre d'étape de marche de l'animation
+	// Nombre d'étape de l'animation de marche
 	int NBETAPESMARCHE = 4;
+	
+	// Nombre d'étape de l'animation de mort
+	int NBETAPESMORT = 2;
+	
+	// Nombre d'étape de l'animation de touche
+	int NBETAPESTOUCHE = 2;
 }

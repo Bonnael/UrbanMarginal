@@ -1,5 +1,7 @@
 package Modele;
 
+import java.util.Collection;
+
 import javax.swing.JLabel;
 
 /**
@@ -39,9 +41,41 @@ public abstract class Objet {
 	}
 	
 	/**
+	 * Verifie si l'objet actuel touche un des objets de la collection
+	 * @param lesObjets collection d'objet (murs, joueurs ou boules)
+	 * @return l'objet touché ou null
+	 */
+	public Objet toucheCollectionObjets(Collection<Objet> lesObjets) {
+		for (Objet unObjet : lesObjets) {
+			if (!unObjet.equals(this)) {
+				if (toucheObjet(unObjet)) {
+					return unObjet;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Getter sur la propriété jLabel
 	 */
 	 public JLabel getjLabel() {
 		 return jLabel;
+	 }
+	 
+	 /**
+	  * Getter sur la propriété PosX
+	  * @return posX
+	  */
+	 public int getPosX() {
+		 return posX;
+	 }
+	 
+	 /**
+	  * Getter sur la propriété posY
+	  * @return posY
+	  */
+	 public int getPosY() {
+		 return posY;
 	 }
 }

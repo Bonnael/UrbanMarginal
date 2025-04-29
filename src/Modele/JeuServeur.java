@@ -5,6 +5,7 @@ import Controler.Global;
 import outils.connexion.Connection;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
@@ -95,6 +96,14 @@ public class JeuServeur extends Jeu implements Global {
 	
 	public void ajoutJLabelJeuArene (JLabel jLabel) {
 		this.control.evenementJeuServeur(AJOUTJLABELJEU, jLabel);
+	}
+	
+	/**
+	 * Getter sur les joueurs
+	 * @return collection de joueur
+	 */
+	public Collection getJoueurs() {
+		return lesJoueurs.values();
 	}
 	
 }
