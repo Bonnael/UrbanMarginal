@@ -32,6 +32,9 @@ public interface Global {
 	// Chemin dossier de l'image des boules
 	String CHEMINBOULES = "boules" + CHEMINSEPARATOR;
 	
+	// Chemin dossier du dossier son
+	String CHEMINSONS = "sons" + CHEMINSEPARATOR;
+	
 	// Debut nom images perso
 	String PERSO = "perso";
 	
@@ -58,6 +61,39 @@ public interface Global {
 	
 	// Chemin de l'image de la boule
 	String BOULE = CHEMINBOULES + "boule.gif";
+	
+	// Chemin de la musique dans ChoixJoueur
+	String BIENVENUE = CHEMINSONS + "welcome.wav";
+	
+	// Chemin du son précédent dans ChoixJoueur
+	String PRECEDENT = CHEMINSONS + "precedent.wav";
+	
+	// Chemin du son suivant dans ChoixJoueur
+	String SUIVANT = CHEMINSONS + "suivant.wav";
+	
+	// Chemin du son go dans ChoixJoueur
+	String GO = CHEMINSONS + "go.wav";
+	
+	// Chemin du son fight dans ChoixJoueur
+	String SONFIGHT = CHEMINSONS + "fight.wav";
+	
+	// Chemin du son hurt dans ChoixJoueur
+	String SONHURT = CHEMINSONS + "hurt.wav";
+	
+	// Chemin du son death dans ChoixJoueur
+	String SONDEATH = CHEMINSONS + "death.wav";
+	
+	// Tableau des son de l'arene
+	String[] SON = {SONFIGHT, SONHURT, SONDEATH};
+	
+	// Index du son fight
+	int FIGHT = 0;
+	
+	// Index du son hurt
+	int HURT = 1;
+	
+	// Index du son death
+	int DEATH = 2;
 	
 	// Message "pseudo" envoyé pour la création d'un joueur
 	String PSEUDO = "pseudo";
@@ -97,6 +133,9 @@ public interface Global {
 	
 	// Message pour une action d'un joueur
 	String ACTION = "action";
+	
+	// Message pour jouer un son
+	String JOUESON = "joue son";
 	
 	// Message pour ajouter une phrase dans l'arene du serveur
 	String AJOUTPHRASE = "ajout phrase";

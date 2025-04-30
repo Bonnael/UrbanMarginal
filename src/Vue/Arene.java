@@ -4,6 +4,7 @@ import Controler.Control;
 import Controler.Global;
 import Modele.Mur;
 import Modele.Objet;
+import outils.son.Son;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -33,6 +34,8 @@ public class Arene extends JFrame implements Global {
 	private JTextField txtSaisie;
 	private Control control;
 	private Boolean client;
+	
+	private Son[] lesSons = new Son[SON.length];
 
 	/**
 	 * Create the frame.
@@ -111,6 +114,14 @@ public class Arene extends JFrame implements Global {
 		lblFond.setBounds(0, 0, 800, 600);
 		contentPane.add(lblFond);
 		
+		// gestion des sons pour le client
+		if (client) {
+			for (int i = 0; i < SON.length; i++) {
+				lesSons[i] = new Son(getClass().getClassLoader().getResource(SON[i]));
+			}
+		}
+		
+		// recuperation de l'instance de Controle
 		this.control = control;
 	}
 	
@@ -209,5 +220,9 @@ public class Arene extends JFrame implements Global {
 		if (touche != -1) {
 			this.control.evenementArene(touche);
 		}
+	}
+	
+	public void joueSon(int numSon) {
+		this.lesSons[numSon].play();
 	}
 }

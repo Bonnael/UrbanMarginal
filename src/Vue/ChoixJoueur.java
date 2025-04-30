@@ -1,6 +1,7 @@
 package Vue;
 
 import Vue.Arene;
+import outils.son.Son;
 import Controler.Control;
 import Controler.Global;
 
@@ -30,6 +31,11 @@ public class ChoixJoueur extends JFrame implements Global {
 	private JTextField txtPseudo;
 	private JLabel lblPersonnage;
 	private Control control;
+	
+	private Son bienvenue;
+	private Son precedent;
+	private Son suivant;
+	private Son go;
 	
 	private int numPerso;
 
@@ -135,6 +141,13 @@ public class ChoixJoueur extends JFrame implements Global {
 		
 		// Affichage personnage
 		this.affichePerso();
+		
+		// Sons
+		bienvenue = new Son(getClass().getClassLoader().getResource(BIENVENUE));
+		precedent = new Son(getClass().getClassLoader().getResource(PRECEDENT));
+		suivant = new Son(getClass().getClassLoader().getResource(SUIVANT));
+		go = new Son(getClass().getClassLoader().getResource(GO));
+		bienvenue.play();
 	}
 	
 	// Clic sur la flèche de gauche
@@ -145,6 +158,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			numPerso--;
 		}
 		this.affichePerso();
+		precedent.play();
 	}
 	
 	// Clic sur la flèche de droite
@@ -155,6 +169,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			numPerso++;
 		}
 		this.affichePerso();
+		suivant.play();
 	}
 	
 	// Clic sur le bouton go
@@ -164,6 +179,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			txtPseudo.requestFocus();
 		} else {
 			this.control.evenementChoixJoueur(txtPseudo.getText(), numPerso);
+			go.play();
 		}
 	}
 	
