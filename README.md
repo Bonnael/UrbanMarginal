@@ -118,3 +118,7 @@ Pendant que la boule avance toute seule dans l'arène, le jeu continue (les joue
 <h3>Fermeture d'une fenêtre </h3>
 Si un joueur ferme sa fenêtre de jeu, le serveur en est informé et le fait disparaître de l'arène. <br>
 Si la fenêtre du serveur est fermée, toutes les fenêtres des clients sont fermées.
+
+## README réalisé par le CNED 
+
+https://github.com/CNED-SLAM/UrbanMarginal
